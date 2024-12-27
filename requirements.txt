@@ -5,7 +5,7 @@ dnspython==2.7.0
 email_validator==2.2.0
 flake8==7.1.1
 Flask==3.1.0
-flask-mongoengine==1.0.0
+flask-mongoengine-3==1.1.0
 Flask-RESTful==0.3.10
 Flask-WTF==1.2.2
 idna==3.10
