@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Api, reqparse, Resource
 from flask_mongoengine import MongoEngine
 from mongoengine import NotUniqueError
@@ -61,9 +61,7 @@ class UserList(Resource):
         return False
 
     def get(self):
-        return {
-            'users': ['user1', 'user2', 'user3']
-        }
+        return jsonify(UserModel.objects())
 
     def post(self):
         data = _user_parser.parse_args()
@@ -86,9 +84,10 @@ class UserList(Resource):
 # Recurso para /users/{cpf}
 class User(Resource):
     def get(self, cpf):
-        return {
-            'user': cpf
-        }
+        user = UserModel.objects(cpf=cpf).first()
+        if user:
+            return jsonify(user)
+        return {'message': 'User not found!'}, 404
 
 
 api.add_resource(UserList, '/users')
