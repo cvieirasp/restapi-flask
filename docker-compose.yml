@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: mongo:7.0.16-jammy
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    restart: always
+    ports:
+      - 27017:27017
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flaskapi
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
