@@ -3,12 +3,11 @@ from flask_restful import Api
 from application.data.db import db
 from application.resources.user_resource import UserList, User
 
-api = Api()
 
-
-def create_app():
+def create_app(dbconfig):
     app = Flask(__name__)
-    app.config.from_object('application.config.Config')
+    app.config.from_object(dbconfig)
+    api = Api()
 
     db.init_app(app)
 

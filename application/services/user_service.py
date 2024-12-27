@@ -18,4 +18,4 @@ class UserService:
             user.save()
             return user
         except NotUniqueError:
-            raise ValueError(f"A user with CPF {data['cpf']} already exists!")
+            raise ValueError('A user with CPF %s already exists!' % data['cpf'])
